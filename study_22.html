@@ -1,0 +1,1161 @@
+<html>
+
+<head>
+	<title>DICOM VIEWER</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:700italic,400,300,700' rel='stylesheet'
+		type='text/css'>
+	<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/skel-panels.min.js"></script>
+	<script src="js/init.js"></script>
+	<script src="xmlOutput.js"></script>
+	<script src="jsonObservation.js"></script>
+	<noscript>
+		<link rel="stylesheet" href="css/skel-noscript.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style-desktop.css" />
+		<link rel="stylesheet" href="css/style2.css" />
+	</noscript>
+
+	<style>
+		.btn-outline-light {
+			color: #f8f9fa;
+			background-color: gray;
+			background-image: none;
+			border-color: #f8f9fa;
+		}
+
+		.btn-outline-light:hover {
+			color: #212529;
+			background-color: #f8f9fa;
+			border-color: #f8f9fa;
+		}
+
+		.btn-outline-light:focus,
+		.btn-outline-light.focus {
+			box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+		}
+
+		.btn-outline-light.disabled,
+		.btn-outline-light:disabled {
+			color: #f8f9fa;
+			background-color: transparent;
+		}
+
+		.btn-outline-light:not(:disabled):not(.disabled):active,
+		.btn-outline-light:not(:disabled):not(.disabled).active,
+		.show>.btn-outline-light.dropdown-toggle {
+			color: #212529;
+			background-color: #f8f9fa;
+			border-color: #f8f9fa;
+		}
+
+		.btn-outline-light:not(:disabled):not(.disabled):active:focus,
+		.btn-outline-light:not(:disabled):not(.disabled).active:focus,
+		.show>.btn-outline-light.dropdown-toggle:focus {
+			box-shadow: 0 0 0 0.2rem gray;
+		}
+
+		.btn {
+			display: inline-block;
+			/* font-weight: 400;  */
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			border: 1px solid transparent;
+			padding: 0.375rem 0.75rem;
+			font-size: 95%;
+			line-height: 1.5;
+			border-radius: 0.25rem;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		}
+
+		@media screen and (prefers-reduced-motion: reduce) {
+
+			.btn,
+			.btnzoom {
+				transition: none;
+			}
+		}
+
+		.btn:hover,
+		.btn:focus {
+			text-decoration: none;
+		}
+
+		.btn:focus,
+		.btn.focus {
+			outline: 0;
+			box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+		}
+
+		.btn.disabled,
+		.btn:disabled {
+			opacity: 0.65;
+		}
+
+		.btn:not(:disabled):not(.disabled) {
+			cursor: pointer;
+		}
+
+		#allcanvas {
+			position: relative;
+		}
+
+		#myCanvas {
+			position: absolute;
+			cursor: pointer;
+		}
+
+		#drawCanvas {
+			position: absolute;
+			cursor: pointer;
+		}
+
+		#smallCanvas {
+			position: absolute;
+			top: 17%;
+			left: 67.2%;
+			cursor: pointer;
+		}
+
+		img {
+			width: 95%;
+			length: 100%;
+			border: 3px solid transparent;
+		}
+
+		img:hover {
+			opacity: 0.5;
+		}
+
+		.imageline img {
+			width: 260px;
+			border: 3px solid red;
+			padding: 1px;
+		}
+
+		#sliderzoom {
+			position: absolute;
+			top: 33%;
+			left: 69.4%;
+		}
+
+		table,
+		td,
+		th {
+			border: 3px solid #ddd;
+			text-align: left;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 5%;
+		}
+
+		table.body {
+			display: block;
+			height: 100px;
+			width: 100px;
+			overflow: scroll;
+		}
+
+		th,
+		td {
+			padding: 15px;
+		}
+
+		#myTable {
+			position: absolute;
+			top: 1000px;
+			left: 30%;
+			overflow: scroll;
+		}
+
+		#svgDisp {
+			position: absolute;
+			top: 40%;
+			left: 70%;
+		}
+
+		#disp {
+			position: absolute;
+			top: 600px;
+			left: 1035px;
+		}
+
+		#parameter {
+			position: relative;
+		}
+
+		#btnzoom {
+			position: absolute;
+			top: 34%;
+			width: 2.5%;
+			height: 1%;
+			text-align: center;
+			border-radius: 0.25rem;
+			border: 1px solid transparent;
+			font-size: 72%;
+		}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f9f9f9;
+			min-width: 70px;
+			cursor: pointer;
+			z-index: 1;
+		}
+
+		.dropdown-content p:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+		.dropdown-content p:active {
+			color: red;
+		}
+
+		.dropdown:hover .dropdown-content {
+			display: block;
+		}
+
+		#Oobs {
+			table-layout: fixed;
+		}
+
+		#Oobs tr:hover {
+			background-color: #ffff99;
+		}
+
+		/* The Modal (background) */
+		.modal {
+			display: none;
+			/* Hidden by default */
+			position: fixed;
+			/* Stay in place */
+			z-index: 1;
+			/* Sit on top */
+			padding-top: 100px;
+			/* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%;
+			/* Full width */
+			height: 100%;
+			/* Full height */
+			overflow: auto;
+			/* Enable scroll if needed */
+			background-color: rgb(0, 0, 0);
+			/* Fallback color */
+			background-color: rgba(0, 0, 0, 0.4);
+			/* Black w/ opacity */
+		}
+
+		.modal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+		}
+
+		.close {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		.dropbtn {
+			background-color: #3498DB;
+			color: white;
+			padding: 16px;
+			font-size: 16px;
+			border: none;
+			cursor: pointer;
+		}
+
+		.dropbtn:hover,
+		.dropbtn:focus {
+			background-color: #2980B9;
+		}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f1f1f1;
+			min-width: 160px;
+			overflow: auto;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			z-index: 1;
+		}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.dropdown a:hover {
+			background-color: #ddd;
+		}
+
+		.show {
+			display: block;
+		}
+	</style>
+
+</head>
+
+<body class="homepage">
+
+	<!-- Header -->
+	<div id="header">
+		<div class="container">
+
+			<!-- Logo -->
+			<div id="logo">
+				<h1><a href="#">DICOM viewer</a></h1>
+			</div>
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">HOMEPAGE</a></li>
+					<li class="active"><a href="left-sidebar.html">Picture</a></li>
+				</ul>
+			</nav>
+
+		</div>
+	</div>
+	<!-- Header -->
+
+	<!-- Main -->
+
+	<!-- Main -->
+	<div id="main" class="container" style="background-color:black">
+		<div class="row">
+			<div class="3u">
+				<section class="sidebar" style="background-color:gray">
+					<header>
+						<h2 style="text-align:center;color:white">DICOM PICTURE:</h2>
+					</header>
+					<ul class="style1">
+						<img onclick="setIndex(0)" id="Photo(0)" src="Study2/jpeg/mammo1.jpg">
+						<img onclick="setIndex(2)" id="Photo(2)" src="Study2/jpeg/mammo3.jpg">
+						<img onclick="setIndex(3)" id="Photo(3)" src="Study2/jpeg/mammo4.jpg">
+						<img onclick="setIndex(4)" id="Photo(4)" src="Study2/jpeg/mammo5.jpg">
+					</ul>
+				</section>
+			</div>
+
+			<div class="9u skel-cell-important">
+				<section>
+					<header>
+						<h2 style="color:white">Picture 2: </h2>
+					</header>
+					<p><button type="button" class="btn btn-outline-light" onclick="BrightnessDraw()"
+							style="height: 6%; width: 17%">Set pixel data</button>&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-outline-light" onclick="Brightness()"
+							style="height: 6%; width: 15%">Window L/W</button>
+					<div class="dropdown">
+						<button class="btn btn-outline-light">Annotation &#8711 </button>&nbsp;&nbsp;&nbsp;
+						<div class="dropdown-content">
+							<p onclick="Line()">Line</p>
+							<p onclick="Rect()">Rect</p>
+							<p onclick="Round()">Round</p>
+						</div>
+					</div>
+					<button type="button" class="btn btn-outline-light" onclick="saveimg()"
+						style="height: 6%; width: 11%">Save Obs</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-outline-light" onclick="getSVG()"
+						style="height: 6%; width: 11%">Pan</button>
+					<button type="button" class="btn btn-outline-light" onclick="getline()"
+						style="height: 6%; width: 11%">getLineId</button>
+					</p>
+					<!-- <div class="dropdown">
+						<button onclick="myFunction()" class="dropbtn">Dropdown</button>
+						<div id="myDropdown" class="dropdown-content">
+							<a href="MammoMass.html">Mass</a>
+							<a href="MammoCalcification.html">Calcification</a>
+							<a href="MammoFocalAsymetry.html">FocalAssymetry</a>
+							<a href="MammoQuestion.html">Summary-Question</a>
+						</div>
+					</div> -->
+
+					<input type="number" size="16" id="wcenter">&nbsp;&nbsp;&nbsp;
+					<input type="number" size="16" id="wwidth"><br>
+					<br>
+					<div id="allcanvas">
+						<canvas id="myCanvas" width="400" height="450"></canvas>
+						<canvas id="drawCanvas" width="400" height="450"></canvas>
+					</div>
+					<canvas id="smallCanvas" width="200" height="200"></canvas>
+					<input type="range" id="sliderzoom" min="0" max="1000" value="50">
+					<button type="button" id="btnzoom" class="btn-outline-light" onclick="Zoom(1)"
+						style="left: 70.2%;">1x</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" id="btnzoom" class="btn-outline-light" onclick="Zoom(2)"
+						style="left: 73.7%">2x</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" id="btnzoom" class="btn-outline-light" onclick="Zoom(4)"
+						style="left: 77.2%">4x</button>&nbsp;&nbsp;&nbsp;
+					<button type="button" id="btnzoom" class="btn-outline-light" onclick="Zoom(8)"
+						style="left: 80.7%">8x</button>&nbsp;&nbsp;&nbsp;
+					<table id="myTable" style="color:white;">
+						<tr style="color:white;font-weight:bold;">
+							<th>Type Annotation</th>
+							<th>SVG Annotation</th>
+							<th>Post Annotation</th>
+							<th>Finding Type</th>
+							<th>Finding ID</th>
+						</tr>
+					</table>
+					<textarea id="svgDisp" rows="8" cols="30"></textarea>
+
+				</section>
+			</div>
+		</div>
+	</div>
+	<div id="copyright" class="container">
+		Design by: Victoria, Thalia,Jeshika
+	</div>
+
+	<script>
+		var dcmImg = ["Study2/DCMfiles/mammo1.dcm", "Study2/DCMfiles/mammo2.dcm", "Study2/DCMfiles/mammo3.dcm", "Study2/DCMfiles/mammo4.dcm", "Study2/DCMfiles/mammo5.dcm"];
+		var dcmXML = ["Study2/decodedXML/mammo1.xml", "Study2/decodedXML/mammo2.xml", "Study2/decodedXML/mammo3.xml", "Study2/decodedXML/mammo4.xml", "Study2/decodedXML/mammo5.xml"];
+		var xhttp = new XMLHttpRequest();
+		var dicomData;
+		var imgMetaData, viewPort = new Array(6), UID;
+		var index = -1;
+		var borderred, colorchange = 0;
+		var fixedsw;
+		var fixedsh;
+		var lastline = 0, lastrect = 0, lastcircle = 0;
+		var line = 0, rect = 0, round = 0;	//count for number of notations
+		var svgstr = "";
+		var svgline = new Array(10);
+		for (var i = 0; i < 10; i++) {
+			svgline[i] = new Array(6);
+		}
+		var svgrect = new Array(10);
+		for (var i = 0; i < 10; i++) {
+			svgrect[i] = new Array(6);
+		}
+		var svground = new Array(10);
+		for (var i = 0; i < 10; i++) {
+			svground[i] = new Array(6);
+		}
+		var ratiox, ratioy, pixelx, pixely;
+		var WindowCenter, WindowWidth, Max, Min;
+		var paintline = false, paintrect = false, paintround = false, startX, startY, length;
+		var canvas = document.getElementById("myCanvas"), ctx = canvas.getContext("2d");
+		var drawCanvas = document.getElementById("drawCanvas"), drawCtx = drawCanvas.getContext("2d");
+		var smallCanvas = document.getElementById("smallCanvas"), smallCtx = smallCanvas.getContext("2d");
+		var adjusting = false;
+		//var currrows = 0;
+
+		var oldsx = 0, oldsy = 0, oldsw = 2560 / 400, oldsh = 3328 / 450;
+		// < !--variable declaration-- >
+
+		function setIndex(i) {
+			index = i;
+			if (colorchange == 1) {
+				borderred.style.borderColor = "transparent";
+			}
+
+			function req(file, callFunction) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.open('GET', file, true);
+				if (file == dcmImg[index]) {
+					xhttp.responseType = "arraybuffer";
+				}//取得或設定實際回應類型
+				xhttp.onreadystatechange = function () {
+					if (xhttp.readyState == 4) {
+						callFunction(this);
+					}
+				}
+				xhttp.send();
+			}
+
+			req(dcmXML[index], function getData(xhttp) {
+				var x = xhttp.responseXML.getElementsByTagName("DicomAttribute");
+				var value, keyword, i, y;
+				for (i = 0; i < x.length; i++) {
+					//y= x[i].childNodes[0].nodeName;
+					keyword = x[i].getAttribute('keyword');
+					if (keyword == 'WindowCenter')
+						var readwc = x[i].getElementsByTagName('Value')[0].childNodes[0].nodeValue;
+					if (keyword == 'WindowWidth')
+						var readww = x[i].getElementsByTagName('Value')[0].childNodes[0].nodeValue;
+					if (keyword == 'Rows')
+						var readrow = x[i].getElementsByTagName('Value')[0].childNodes[0].nodeValue;
+					if (keyword == 'Columns')
+						var readcol = x[i].getElementsByTagName('Value')[0].childNodes[0].nodeValue;
+					if (keyword == 'PixelData')
+						var readoffset = x[i].getAttribute('offset');
+					if (keyword == 'SOPInstanceUID')
+						UID = x[i].getElementsByTagName('Value')[0].childNodes[0].nodeValue;
+				}
+				imgMetaData = { rows: parseInt(readrow), columns: parseInt(readcol), storedBytes: 2, samplesPerPixel: 1, pixelDataOffset: parseInt(readoffset) }; //data dicom, samplesPerPixel 1 =b&w
+				document.getElementById("wcenter").value = parseInt(readwc);
+				document.getElementById("wwidth").value = parseInt(readww);
+			});
+
+			req(dcmImg[index], function getDicom(xhttp) {
+				dicomData = new DataView(xhttp.response);
+				viewPort = { vw: 400, vh: 450, sx: 0, sy: 0, sw: imgMetaData.columns, sh: imgMetaData.rows }; //v = view(canvas), s= source images
+				fixedsw = viewPort.sw;
+				fixedsh = viewPort.sh;
+				setPixel(1);
+				setPixel(2);
+				borderred = document.getElementById("Photo(" + index + ")");
+				borderred.style.borderColor = "red";
+			});
+			colorchange = 1;
+		}
+		alert('Click on the images please!');
+
+		function setPixel(i) {
+			var imageData;
+			var x, y, i;
+			var dicomPixelIndex;
+			var pixelValue;
+			var grayValue;
+			WindowCenter = document.getElementById("wcenter").value;
+			WindowWidth = document.getElementById("wwidth").value;
+			Max = WindowCenter + WindowWidth / 2;
+			Min = WindowCenter - WindowWidth / 2;
+			if (i == 1) {	//mainCanvas
+				setViewport();
+				imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+				for (y = 0; y < canvas.height; y++) {
+					for (x = 0; x < canvas.width; x++) {
+						pixelx = viewPort.sx + x * ratiox;
+						pixelx = parseInt(pixelx);
+						pixely = viewPort.sy + y * ratioy;
+						pixely = parseInt(pixely);
+						// Get DICOM image pixel index
+						if (pixelx >= 0 && pixelx < imgMetaData.columns && pixely >= 0 && pixely < imgMetaData.rows) {
+							dicomPixelIndex = (pixely * imgMetaData.columns + pixelx) * imgMetaData.samplesPerPixel * imgMetaData.storedBytes + imgMetaData.pixelDataOffset;
+							pixelValue = dicomData.getUint16(dicomPixelIndex, true); // true for littel endian
+							if (pixelValue >= Max) grayValue = 255; // 灰階值 白
+							else if (Min > pixelValue) grayValue = 0; // 灰階值 黑    if ((pvalue[i][j] == 1) GrayValue = 0; for mammography
+							else grayValue = Math.round((pixelValue - Min) / WindowWidth * 256); //對數字做指定位數的四捨五入計算;電腦顯示值
+							// Get the canvas pixel +  index
+							var canvasPixelIndex = (y * canvas.width + x) * 4;
+							//dicomData.getInt8  references to JS dataView and arrayBuffer  http://www.javascripture.com/ArrayBuffer
+							imageData.data[canvasPixelIndex] = grayValue;     // Red
+							imageData.data[canvasPixelIndex + 1] = grayValue; // Green
+							imageData.data[canvasPixelIndex + 2] = grayValue;  // Blue
+							imageData.data[canvasPixelIndex + 3] = 255;   // Alpha
+						}
+						else {
+							imageData.data[canvasPixelIndex] = 0;     // Red
+							imageData.data[canvasPixelIndex + 1] = 0; // Green
+							imageData.data[canvasPixelIndex + 2] = 0;  // Blue
+							imageData.data[canvasPixelIndex + 3] = 255;   // Alpha
+						}
+					}
+				}
+				ctx.putImageData(imageData, 0, 0);
+			}
+			if (i == 2) { //smallCanvas
+				smallsetViewport();
+				imageData = ctx.getImageData(0, 0, smallCanvas.width, smallCanvas.height)
+				for (y = 0; y < smallCanvas.height; y++) {
+					for (x = 0; x < smallCanvas.width; x++) {
+						pixelx = 0 + x * ratiox;
+						pixelx = parseInt(pixelx);
+						pixely = 0 + y * ratioy;
+						pixely = parseInt(pixely);
+						// Get DICOM image pixel index
+						if (pixelx >= 0 && pixelx < imgMetaData.columns && pixely >= 0 && pixely < imgMetaData.rows) {
+							dicomPixelIndex = (pixely * imgMetaData.columns + pixelx) * imgMetaData.samplesPerPixel * imgMetaData.storedBytes + imgMetaData.pixelDataOffset;
+							pixelValue = dicomData.getUint16(dicomPixelIndex, true); // true for littel endian
+							if (pixelValue >= Max) grayValue = 255; // 灰階值 白
+							else if (Min > pixelValue) grayValue = 0; // 灰階值 黑    if ((pvalue[i][j] == 1) GrayValue = 0; for mammography
+							else grayValue = Math.round((pixelValue - Min) / WindowWidth * 256); //對數字做指定位數的四捨五入計算;電腦顯示值
+							// Get the canvas pixel +  index
+							var canvasPixelIndex = (y * smallCanvas.width + x) * 4;
+							//dicomData.getInt8  references to JS dataView and arrayBuffer  http://www.javascripture.com/ArrayBuffer
+							imageData.data[canvasPixelIndex] = grayValue;     // Red
+							imageData.data[canvasPixelIndex + 1] = grayValue; // Green
+							imageData.data[canvasPixelIndex + 2] = grayValue;  // Blue
+							imageData.data[canvasPixelIndex + 3] = 255;   // Alpha
+						}
+						else {
+							imageData.data[canvasPixelIndex] = 0;     // Red
+							imageData.data[canvasPixelIndex + 1] = 0; // Green
+							imageData.data[canvasPixelIndex + 2] = 0;  // Blue
+							imageData.data[canvasPixelIndex + 3] = 255;   // Alpha
+						}
+					}
+				}
+				smallCtx.putImageData(imageData, 0, 0);
+			}
+		}
+
+		function setViewport() {
+			ratiox = viewPort.sw / viewPort.vw;
+			ratioy = viewPort.sh / viewPort.vh;
+			canvas.width = viewPort.vw;
+			canvas.height = viewPort.vh;
+			drawCanvas.width = viewPort.vw;
+			drawCanvas.height = viewPort.vh;
+		}
+
+		function smallsetViewport() {
+			ratiox = fixedsw / (fixedsw / 10);
+			ratioy = fixedsh / (fixedsh / 13);
+			smallCanvas.width = fixedsw / 10; //2560/10=256
+			smallCanvas.height = fixedsh / 13; //3328/13=256
+		}
+
+		// < !-- //small Canvas -->
+		// < !--smallCanvas.onmousedown= function(e) {
+		// 	-->
+		// 	< !--setPixel(2); -->
+		// 	< !--startX = e.pageX - this.offsetLeft - (viewPort.sw / 20); //e=mouse cursor, this=canvas original x, y -->
+		//     < !--startY = e.pageY - this.offsetTop - (viewPort.sh / 26); -->
+		// 	< !--smallCtx.rect(startX, startY, viewPort.sw / 10, viewPort.sh / 13); -->
+		// 	< !--smallCtx.strokeStyle="red"; -->
+		// 	< !--smallCtx.stroke(); -->
+		// 	< !--viewPort.sx=startX * 10; -->
+		// 	< !--viewPort.sy=startY * 13; -->
+		// 	< !--setPixel(1); -->
+		// < !-- } -->
+
+		smallCanvas.onmousedown = function (e) {
+			setPixel(2);
+			//center: e.pageX= 1128 this.offsetLeft= 1000 viewPort.sw=512/4=128
+			startX = e.pageX - this.offsetLeft - (viewPort.sw / 20); //e=mouse cursor, this=canvas original x, y
+			startY = e.pageY - this.offsetTop - (viewPort.sh / 26);
+			smallCtx.rect(startX, startY, viewPort.sw / 10, viewPort.sh / 13);
+			smallCtx.strokeStyle = "red";
+			smallCtx.stroke();
+			viewPort.sx = startX * 10;
+			viewPort.sy = startY * 13; //center: smallCanvas.startY=128, mainCanvas.startY=256
+			setPixel(1);
+			var ratiosw = viewPort.sw / viewPort.vw;
+			var ratiosh = viewPort.sh / viewPort.vh;
+			for (var i = 0; i < line; i++) {
+				lineAgain((svgline[i][0] - viewPort.sx) / ratiosw, (svgline[i][1] - viewPort.sy) / ratiosh, (svgline[i][2] - viewPort.sx) / ratiosw, (svgline[i][3] - viewPort.sy) / ratiosh);
+				oldsx = viewPort.sx;
+				oldsy = viewPort.sy;
+				oldsw = ratiosw;
+				oldsh = ratiosh;
+			}
+			for (var i = 0; i < rect; i++) {
+				rectAgain((svgrect[i][0] - viewPort.sx) / ratiosw, (svgrect[i][1] - viewPort.sy) / ratiosh, (svgrect[i][2] - viewPort.sx) / ratiosw, (svgrect[i][3] - viewPort.sy) / ratiosh);
+				oldsx = viewPort.sx;
+				oldsy = viewPort.sy;
+				oldsw = ratiosw;
+				oldsh = ratiosh;
+			}
+			for (var i = 0; i < round; i++) {
+				roundAgain((svground[i][0] - viewPort.sx) / ratiosw, (svground[i][1] - viewPort.sy) / ratiosh, (svground[i][2] - viewPort.sx) / ratiosw, (svground[i][3] - viewPort.sy) / ratiosh);
+				oldsx = viewPort.sx;
+				oldsy = viewPort.sy;
+				oldsw = ratiosw;
+				oldsh = ratiosh;
+			}
+		}
+
+		// < !-- //zoom in and out slider -->
+		var slider = document.getElementById("sliderzoom"), oldvalues = 0;
+		slider.oninput = function () {
+			var s = this.value - 50;
+			var values = s - oldvalues;
+			viewPort.sx += values;
+			viewPort.sy += values;
+			viewPort.sw -= (2 * values);
+			viewPort.sh -= (2 * values);
+
+			setPixel(1);
+			setPixel(2);
+			//center: e.pageX= 1128 this.offsetLeft= 1000 viewPort.sw=512/4=128
+			startX = viewPort.sx / 10; //e=mouse cursor, this=canvas original x, y
+			startY = viewPort.sy / 13;
+			smallCtx.rect(startX, startY, viewPort.sw / 10, viewPort.sh / 13);
+			smallCtx.strokeStyle = "yellow";
+			smallCtx.stroke();
+			oldvalues = s;
+
+			var ratiosw = viewPort.sw / viewPort.vw;
+			var ratiosh = viewPort.sh / viewPort.vh;
+			for (var i = 0; i <= line; i++) {
+				// < !--alert("svgline[i][0] in zoomIn: " + svgline[i][0]); -->
+				// < !--alert("viewPort.sx in zoomIn: " + viewPort.sx); -->
+				// < !--alert("ratiosw in zoomIn: " + ratiosw); -->
+				// < !--alert("startx in zoomIn: " + ((svgline[i][0] - viewPort.sx) / ratiosw)); -->
+				lineAgain((svgline[i][0] - viewPort.sx) / ratiosw, (svgline[i][1] - viewPort.sy) / ratiosh, (svgline[i][2] - viewPort.sx) / ratiosw, (svgline[i][3] - viewPort.sy) / ratiosh, svgline[i][4]);
+				oldsx = viewPort.sx;
+				oldsy = viewPort.sy;
+				oldsw = ratiosw;
+				oldsh = ratiosh;
+			}
+
+			for (var i = 0; i < rect; i++) {
+				rectAgain((svgrect[i][0] - viewPort.sx) / ratiosw, (svgrect[i][1] - viewPort.sy) / ratiosh, (svgrect[i][2] - viewPort.sx) / ratiosw, (svgrect[i][3] - viewPort.sy) / ratiosh);
+				oldsx = viewPort.sx;
+				oldsy = viewPort.sy;
+				oldsw = ratiosw;
+				oldsh = ratiosh;
+			}
+		}
+
+		function Line() {
+			drawCanvas.onmousedown = function (e) {
+				paintline = true;
+				startX = e.pageX - document.getElementById("allcanvas").offsetLeft; //e=mouse cursor, this=canvas original x,
+				startY = e.pageY - document.getElementById("allcanvas").offsetTop;
+			}
+
+			drawCanvas.onmousemove = function (e) {
+				drawCtx.clearRect(0, 0, 600, 600);
+				var x2 = e.pageX - document.getElementById("allcanvas").offsetLeft, y2 = e.pageY - document.getElementById("allcanvas").offsetTop;
+				if (paintline) {
+					drawCtx.beginPath();
+					drawCtx.moveTo(startX, startY);
+					drawCtx.lineTo(x2, y2);
+					drawCtx.strokeStyle = "yellow";
+					drawCtx.stroke();
+
+					drawCtx.fillStyle = "yellow";
+					drawCtx.font = 1;
+					powX = Math.pow((x2 - startX), 2);
+					powY = Math.pow((y2 - startY), 2);
+
+					length = Math.sqrt((powX + powY), 2);
+					length = (length).toFixed(2);
+
+					drawCtx.fillText(length + 'mm', (x2 + startX) / 2, (y2 + startY) / 2);
+					// < !-- if (length >= 10) {
+					// 	-->
+					//     < !--drawCtx.fillText(length + 'cm', (x2 + startX) / 2, (y2 + startY) / 2); -->
+					// < !-- } -->
+					// < !-- else {
+					// 	-->
+					//     < !--drawCtx.fillText(length + 'mm', (x2 + startX) / 2, (y2 + startY) / 2); -->
+					// < !-- } -->
+				}
+			}
+
+			drawCanvas.onmouseup = function (e) {
+				paintline = false;
+				var x2 = e.pageX - document.getElementById("allcanvas").offsetLeft, y2 = e.pageY - document.getElementById("allcanvas").offsetTop;
+				//alert("startx in Line mouseUp: " + startX);
+				lineAgain(startX, startY, x2, y2, length);
+
+				svgline[line][0] = (startX * oldsw) + oldsx;
+				svgline[line][1] = (startY * oldsh) + oldsy;
+				svgline[line][2] = (x2 * oldsw) + oldsx;
+				svgline[line][3] = (y2 * oldsh) + oldsy;
+				svgline[line][4] = length;
+
+
+				/*svgstr = '<svg width="400" height="450">\n';
+				svgstr += '<line x1="';
+				svgstr += parseInt(svgline[line][0]);
+				svgstr += '" y1="';
+				svgstr += parseInt(svgline[line][1]);
+				svgstr += '" x2="';
+				svgstr += parseInt(svgline[line][2]);
+				svgstr += '" y2="';
+				svgstr += parseInt(svgline[line][3]);
+				svgstr += '" style="stroke:rgb(255,255,0);stroke-width:2" />\n';
+				svgstr += "</svg>";*/
+				// var svg = window.btoa(svgstr);
+				// formInputsToXML('breast', document.URL, UID, svg, viewPort.sx, viewPort.sy, viewPort.sw, viewPort.sh, WindowCenter, WindowWidth, dcmImg[index], "line");
+				line++;
+			}
+		}
+
+		function lineAgain(startX, startY, x2, y2, len) {
+			ctx.beginPath();
+			ctx.moveTo(startX, startY);
+			ctx.lineTo(x2, y2);
+			ctx.strokeStyle = "yellow";
+			ctx.stroke();
+			ctx.fillStyle = "red";
+			ctx.font = 3;
+			ctx.fillText(len + 'mm', (x2 + startX) / 2, (y2 + startY) / 2);
+			// < !--powX = Math.pow((x2 - startX), 2); -->
+			// < !--powY = Math.pow((y2 - startY), 2); -->
+
+			// < !--length = Math.sqrt((powX + powY), 2); -->
+			// < !--length = (length).toFixed(2); -->
+
+			// < !-- if (length >= 10) {
+			// 	-->
+			//     < !--ctx.fillText(length + 'cm', (x2 + startX) / 2, (y2 + startY) / 2); -->
+			// < !-- } -->
+			// < !-- else {
+			// 	-->
+			//     < !--ctx.fillText(length + 'mm', (x2 + startX) / 2, (y2 + startY) / 2); -->
+			// < !-- } -->
+		}
+
+		function Rect() {
+			drawCanvas.onmousedown = function (e) {
+				paintrect = true;
+				startX = e.pageX - document.getElementById("allcanvas").offsetLeft; //e=mouse cursor, this=canvas original x,
+				startY = e.pageY - document.getElementById("allcanvas").offsetTop;
+			}
+			drawCanvas.onmousemove = function (e) {
+
+				drawCtx.clearRect(0, 0, 512, 512);
+				var x2 = e.pageX - document.getElementById("allcanvas").offsetLeft, y2 = e.pageY - document.getElementById("allcanvas").offsetTop;
+				var rangeX = x2 - startX, rangeY = y2 - startY;
+
+				if (paintrect) {
+
+					drawCtx.beginPath();
+					drawCtx.rect(startX, startY, rangeX, rangeY);
+					drawCtx.strokeStyle = "red";
+					drawCtx.stroke();
+				}
+			}
+			drawCanvas.onmouseup = function (e) {
+				paintrect = false;
+				var x2 = e.pageX - document.getElementById("allcanvas").offsetLeft, y2 = e.pageY - document.getElementById("allcanvas").offsetTop;
+				rectAgain(startX, startY, x2, y2);
+
+				svgrect[rect][0] = (startX * oldsw) + oldsx;
+				svgrect[rect][1] = (startY * oldsh) + oldsy;
+				svgrect[rect][2] = (x2 * oldsw) + oldsx;
+				svgrect[rect][3] = (y2 * oldsh) + oldsy;
+
+				rect++;
+			}
+		}
+
+		function rectAgain(startX, startY, x2, y2) {
+			var rangeX = x2 - startX, rangeY = y2 - startY;
+			ctx.beginPath();
+			ctx.rect(startX, startY, rangeX, rangeY);
+			ctx.strokeStyle = "yellow";
+			ctx.stroke();
+		}
+		var cirx, ciry, radius;
+		function Round() {
+
+			drawCanvas.onmousedown = function (e) {
+				paintround = true;
+				startX = e.pageX - document.getElementById("allcanvas").offsetLeft; //e=mouse cursor, this=canvas original x,
+				startY = e.pageY - document.getElementById("allcanvas").offsetTop;
+			}
+			drawCanvas.onmousemove = function (e) {
+				drawCtx.clearRect(0, 0, 400, 400);
+				var x2 = e.pageX - document.getElementById("allcanvas").offsetLeft, y2 = e.pageY - document.getElementById("allcanvas").offsetTop;
+				cirx = Math.abs(x2 - startX);
+				ciry = Math.abs(y2 - startY);
+				radius = Math.sqrt(cirx * cirx + ciry * ciry);
+
+				if (paintround) {
+					drawCtx.beginPath();
+					drawCtx.arc(startX, startY, radius, 0, 2 * Math.PI);
+					drawCtx.strokeStyle = "yellow";
+					drawCtx.stroke();
+				}
+			}
+			drawCanvas.onmouseup = function (e) {
+				paintround = false;
+				var x2 = e.pageX - document.getElementById("allcanvas").offsetLeft, y2 = e.pageY - document.getElementById("allcanvas").offsetTop;
+				roundAgain(startX, startY, x2, y2);
+
+				svground[round][0] = cirx;
+				svground[round][1] = ciry;
+				svground[round][2] = radius;
+				round++;
+			}
+		}
+
+		function roundAgain(startX, startY, x2, y2) {
+			var cirx = Math.abs(x2 - startX);
+			var ciry = Math.abs(y2 - startY);
+			var radius = Math.sqrt(cirx * cirx + ciry * ciry);
+			ctx.beginPath();
+			ctx.arc(startX, startY, radius, 0, 2 * Math.PI);
+			ctx.strokeStyle = "yellow";
+			ctx.stroke();
+		}
+
+		function Brightness() {
+			var nextCenter = WindowCenter;
+			var nextWidth = WindowWidth;
+			var state = 1; //1=塗鴉 2=直線 3=圓形 4=橢圓形 5=正方形 6=長方形 7=橡皮擦 8=註解
+
+
+			drawCanvas.onmousedown = function (e) {
+				adjusting = true;
+				startX = e.clientX;
+				startY = e.clientY;
+			}
+
+			drawCanvas.onmousemove = function (e) {
+				if (adjusting == true) {
+					var x = e.clientX;
+					var y = e.clientY;
+					nextCenter = parseInt(WindowCenter) + x - startX;
+					nextWidth = parseInt(WindowWidth) + y - startY;
+				}
+			}
+
+			drawCanvas.onmouseup = function (e) {
+				if (adjusting == true) {
+					adjusting = false;
+					document.getElementById("wcenter").value = nextCenter;
+					document.getElementById("wwidth").value = nextWidth;
+					BrightnessDraw();
+				}
+			}
+		}
+
+		function BrightnessDraw() {
+			setPixel(1);
+			var ratiosw = viewPort.sw / viewPort.vw;
+			var ratiosh = viewPort.sh / viewPort.vh;
+			for (var i = 0; i < line; i++) {
+				lineAgain((svgline[i][0] - viewPort.sx) / ratiosw, (svgline[i][1] - viewPort.sy) / ratiosh, (svgline[i][2] - viewPort.sx) / ratiosw, (svgline[i][3] - viewPort.sy) / ratiosh);
+				oldsx = viewPort.sx;
+				oldsy = viewPort.sy;
+				oldsw = ratiosw;
+				oldsh = ratiosh;
+			}
+			for (var i = 0; i < rect; i++) {
+				rectAgain((svgrect[i][0] - viewPort.sx) / ratiosw, (svgrect[i][1] - viewPort.sy) / ratiosh, (svgrect[i][2] - viewPort.sx) / ratiosw, (svgrect[i][3] - viewPort.sy) / ratiosh);
+				oldsx = viewPort.sx;
+				oldsy = viewPort.sy;
+				oldsw = ratiosw;
+				oldsh = ratiosh;
+			}
+		}
+
+		function saveimg() {
+			var table = document.getElementById("myTable");
+			var thead, tr, td;
+			svgstr = '<svg>\n';
+			for (var i = lastline; i < line; i++) {
+				var svgstr1 = '';
+				svgstr1 += '<line x1="';
+				svgstr1 += parseInt(svgline[i][0]);
+				svgstr1 += '" y1="';
+				svgstr1 += parseInt(svgline[i][1]);
+				svgstr1 += '" x2="';
+				svgstr1 += parseInt(svgline[i][2]);
+				svgstr1 += '" y2="';
+				svgstr1 += parseInt(svgline[i][3]);
+				svgstr1 += '" style="stroke:rgb(255,255,0);stroke-width:2" />\n';
+
+				svgstr += svgstr1;
+				tablelist('<svg>' + svgstr1 + '</svg>', table, "line");
+			}
+			for (var i = lastrect; i < rect; i++) {
+				var rangeX = svgrect[i][2] - svgrect[i][0], rangeY = svgrect[i][3] - svgrect[i][1];
+				var svgstr1 = '';
+				svgstr1 += '<rect x="';
+				svgstr1 += parseInt(svgrect[i][0]);
+				svgstr1 += '" y="';
+				svgstr1 += parseInt(svgrect[i][1]);
+				svgstr1 += '" width="';
+				svgstr1 += parseInt(rangeX);
+				svgstr1 += '" height="';
+				svgstr1 += parseInt(rangeY);
+				svgstr1 += '" style="stroke:rgb(255,255,0);stroke-width:2" />\n';
+
+				svgstr += svgstr1;
+				tablelist('<svg>' + svgstr1 + '</svg>', table, "rectangle");
+			}
+
+			for (var i = lastcircle; i < round; i++) {
+				var rangeX = svground[i][2] - svground[i][0], rangeY = svground[i][3] - svground[i][1];
+				var svgstr1 = '';
+				svgstr1 += '<circle cx="';
+				svgstr1 += parseInt(svground[i][0]);
+				svgstr1 += '" cy="';
+				svgstr1 += parseInt(svground[i][1]);
+				svgstr1 += '" r="';
+				svgstr1 += parseInt(svground[i][2]);
+				svgstr1 += '" stroke="yellow" stroke-width="2"/>\n';
+
+				svgstr += svgstr1;
+				tablelist('<svg>' + svgstr1 + '</svg>', table, "circle");
+			}
+			lastline = line;
+			lastrect = rect;
+			lastcircle = round;
+			svgstr += "</svg>";
+
+			document.getElementById("svgDisp").innerHTML = svgstr;
+		}
+		function tablelist(svgstr1, table, annotationType) {
+			var btn = document.createElement('input');
+			btn.type = "button";
+			btn.id = "postAnnotationBtn" + table.rows.length;
+			btn.value = "Post Annotation";
+			var lenrow = table.rows.length;
+			btn.onclick = function () { postFHIR(lenrow) };
+			var txtbox = document.createElement('input');
+			txtbox.type = "text";
+			txtbox.id = "PositionTB" + table.rows.length;
+			txtbox.disabled = 'false';
+			txtbox.value = svgstr1;
+			var dropdownform = document.createElement('select');
+			dropdownform.id = "FormReportType_" + table.rows.length;
+			dropdownform.onchange = function () { OnSelectedIndexChange(this, table, lenrow) };
+			dropdownform.appendChild(option = document.createElement("option"));
+			option.value = "0";
+			option.text = "Finding Type";
+			dropdownform.appendChild(option = document.createElement("option"));
+			option.value = "1";
+			option.text = "Mammo Mass";
+			dropdownform.appendChild(option = document.createElement("option"));
+			option.value = "2";
+			option.text = "Mammo Calcification";
+			dropdownform.appendChild(option = document.createElement("option"));
+			option.value = "3";
+			option.text = "Mammo Architectural Distortion";
+			dropdownform.appendChild(option = document.createElement("option"));
+			option.value = "4";
+			option.text = "Mammo Focal Asymetry";
+			dropdownform.appendChild(option = document.createElement("option"));
+			option.value = "5";
+			option.text = "Mammo Question";
+
+
+			table.appendChild(tr = document.createElement("tr"));
+			tr.appendChild(td = document.createElement("td"));
+			td.innerHTML = annotationType;
+			tr.appendChild(td = document.createElement("td"));
+			td.appendChild(txtbox);
+			tr.appendChild(td = document.createElement("td"));
+			td.appendChild(btn);
+			tr.appendChild(td = document.createElement("td"));
+			td.appendChild(dropdownform);
+			tr.appendChild(td = document.createElement("td"));
+			td.innerHTML = "";
+		}
+		function postFHIR(rowslength) {
+			var annotationType = document.getElementById("myTable").rows[rowslength].cells[0].innerHTML;
+			document.getElementById("postAnnotationBtn" + rowslength).value = "posted";
+			var svg = document.getElementById("PositionTB" + rowslength).value;
+			svg = window.btoa(svg)
+
+			formInputsToXML('breast', document.URL, UID, svg, viewPort.sx, viewPort.sy, viewPort.sw, viewPort.sh, WindowCenter, WindowWidth, dcmImg[index], annotationType);
+		}
+		function OnSelectedIndexChange(drpdwn, table, rowslength) {
+			var url = "";
+			var selectedText = drpdwn.options[drpdwn.selectedIndex].innerHTML;
+			if (selectedText == "Mammo Mass") { url = "MammoMass.html"; }
+			else if (selectedText == "Mammo Calcification") { url = "MammoCalcification.html"; }
+			else if (selectedText == "Mammo Architectural Distortion") { url = "MammoArchitecturalDistortion.html"; }
+			else if (selectedText == "Mammo Focal Asymetry") { url = "MammoFocalAsymetry.html"; }
+			else if (selectedText == "Mammo Question") { url = "MammoQuestion.html"; }
+
+			window.open(url, '_blank', 'location=yes,height=900,width=900,scrollbars=yes,status=yes,top=0,left=500');
+			var id = 0;
+			var annotationType = table.rows[rowslength].cells[0].innerHTML;
+			for (var i = 0; i < rowslength; i++) {
+				if (document.getElementById("myTable").rows[i].cells[0].innerHTML == annotationType) {
+					id += 1;
+				}
+			}
+			if (annotationType == "line") { id = cline[id]; }
+			else if (annotationType == "rectangle") { id = crect[id]; }
+			else if (annotationType == "circle") { id = ccircle[id]; }
+			document.cookie = "AnnotationID=" + id + ";";
+		}
+		function getSVG() {
+			var subSVG = svgstr.split("<");
+			for (var i = 1; i < subSVG.length; i++) {
+				if (subSVG[i].startsWith("line")) {
+					var subLine = subSVG[i].split('="');
+					alert(subLine);
+					for (var j = 1; j < subLine.length; j++) {
+						alert(subLine[j].substring(0, subLine[j].indexOf('"')));
+					}
+				}
+				else if (subSVG[i].startsWith("rect")) {
+					var subLine = subSVG[i].split('="');
+					alert(subLine);
+					for (var j = 1; j < subLine.length; j++) {
+						alert(subLine[j].substring(0, subLine[j].indexOf('"')));
+					}
+				}
+			}
+		}
+		function getline() {
+			drawCanvas.onmousedown = function (e) {
+				//paintline = true;
+				var ratiosw = viewPort.sw / viewPort.vw;
+				var ratiosh = viewPort.sh / viewPort.vh;
+				startX = e.pageX - document.getElementById("allcanvas").offsetLeft; //e=mouse cursor, this=canvas original x,
+				startY = e.pageY - document.getElementById("allcanvas").offsetTop;
+
+				for (var i = 0; i < line; i++) {
+					var dy = (svgline[i][3] - svgline[i][1] - (2 * viewPort.sy)) / ratiosh;
+					var dx = (svgline[i][2] - svgline[i][0] - (2 * viewPort.sx)) / ratiosw;
+					var m = dy / dx;
+					var b = ((svgline[i][1] - viewPort.sy) / ratiosh) - (m * ((svgline[i][0] - viewPort.sx) / ratiosw));
+
+					if (startY == ((m * startX) + b)) {
+						alert("id=" + cline[i])
+					}
+					// svgstr += '<line x1="';
+					// svgstr += parseInt(svgline[i][0]);
+					// svgstr += '" y1="';
+					// svgstr += parseInt(svgline[i][1]);
+					// svgstr += '" x2="';
+					// svgstr += parseInt(svgline[i][2]);
+					// svgstr += '" y2="';
+					// svgstr += parseInt(svgline[i][3]);
+					// svgstr += '" style="stroke:rgb(255,255,0);stroke-width:2" />\n';
+				}
+			}
+			drawCanvas.onmouseup = function (e) { }
+		}
+		function myFunction() {
+			document.getElementById("myDropdown").classList.toggle("show");
+		}
+
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function (e) {
+			if (!e.target.matches('.dropbtn')) {
+				var myDropdown = document.getElementById("myDropdown");
+				if (myDropdown.classList.contains('show')) {
+					myDropdown.classList.remove('show');
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

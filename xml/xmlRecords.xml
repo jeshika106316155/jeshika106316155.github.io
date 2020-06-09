@@ -1,0 +1,25 @@
+<Dicom>
+	<Study>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM1.jpg" xml="Study1/decodedXML/MR2S1IM1.xml" dcm="Study1/DCMfiles/MR2S1IM1.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM2.jpg" xml="Study1/decodedXML/MR2S1IM2.xml" dcm="Study1/DCMfiles/MR2S1IM2.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM3.jpg" xml="Study1/decodedXML/MR2S1IM3.xml" dcm="Study1/DCMfiles/MR2S1IM3.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM4.jpg" xml="Study1/decodedXML/MR2S1IM4.xml" dcm="Study1/DCMfiles/MR2S1IM4.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM5.jpg" xml="Study1/decodedXML/MR2S1IM5.xml" dcm="Study1/DCMfiles/MR2S1IM5.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM6.jpg" xml="Study1/decodedXML/MR2S1IM6.xml" dcm="Study1/DCMfiles/MR2S1IM6.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM7.jpg" xml="Study1/decodedXML/MR2S1IM7.xml" dcm="Study1/DCMfiles/MR2S1IM7.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM8.jpg" xml="Study1/decodedXML/MR2S1IM8.xml" dcm="Study1/DCMfiles/MR2S1IM8.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study1/MR2S1IM9.jpg" xml="Study1/decodedXML/MR2S1IM9.xml" dcm="Study1/DCMfiles/MR2S1IM9.dcm"></Image>
+	</Study>
+	<Study>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study2/mammo1.jpg" xml="Study2/decodedXML/mammo1.xml" dcm="Study2/DCMfiles/mammo1.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study2/mammo3.jpg" xml="Study2/decodedXML/mammo3.xml" dcm="Study2/DCMfiles/mammo3.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study2/mammo4.jpg" xml="Study2/decodedXML/mammo4.xml" dcm="Study2/DCMfiles/mammo4.dcm"></Image>
+		<Image jpg="http://203.64.84.218:81/DICOMimg/study2/mammo5.jpg" xml="Study2/decodedXML/mammo5.xml" dcm="Study2/DCMfiles/mammo5.dcm"></Image>
+	</Study>
+	<Study>
+		<Image jpg="http://www.dicomserver.co.uk/wado/WADO.asp?requestType=WADO&amp;studyUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293210000&amp;seriesUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293220000&amp;objectUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293250000&amp;contentType=image/jpeg&amp;rows=256&amp;columns=256" xml="" dcm=""></Image>
+		<Image jpg="http://www.dicomserver.co.uk/wado/WADO.asp?requestType=WADO&amp;studyUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293210000&amp;seriesUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293220000&amp;objectUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864326030000&amp;contentType=image/jpeg&amp;rows=256&amp;columns=256" xml="" dcm=""></Image>
+		<Image jpg="http://www.dicomserver.co.uk/wado/WADO.asp?requestType=WADO&amp;studyUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293210000&amp;seriesUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293220000&amp;objectUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517869169690000&amp;contentType=image/jpeg&amp;rows=256&amp;columns=256" xml="" dcm=""></Image>
+		<Image jpg="http://www.dicomserver.co.uk/wado/WADO.asp?requestType=WADO&amp;studyUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293210000&amp;seriesUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517864293220000&amp;objectUID=1.2.826.0.1.3680043.9.7189.169889160154363.15517926169640000&amp;contentType=image/jpeg&amp;rows=256&amp;columns=256" xml="" dcm=""></Image>
+	</Study>
+</Dicom>

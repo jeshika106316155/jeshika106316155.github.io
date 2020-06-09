@@ -1,0 +1,153 @@
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script language="JavaScript" type="text/javascript" src="getFHIR.js"></script>
+    <script language="JavaScript" type="text/javascript" src="json.js"></script>
+
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="patient" name="patient" style="text-align: left">
+        Patien ID:
+        <div id="divselectP"></div>
+        <!-- <select name="Select PatientID" id="PatientIDSelect">
+        </select> -->
+        Type Patient ID:<input type="text" name="PatientIDType" id="PatientIDType" value="" />
+        <input type="button" value="search imaging study" id="patient" onclick="searchImagingStudy()" /><br>
+        <table id="myTable" style="color:black;">
+            <tr style="color:black;font-weight:bold;">
+                <th>No.</th>
+                <th>Imaging Study UID</th>
+            </tr>
+        </table><br>
+        <table id="myTableSeries" style="color:black;">
+            <tr style="color:black;font-weight:bold;">
+                <th>No.</th>
+                <th>Series UID</th>
+            </tr>
+        </table><br>
+        <table id="myTableInstance" style="color:black;">
+            <tr style="color:black;font-weight:bold;">
+                <th>No.</th>
+                <th>SOP Instance UID</th>
+            </tr>
+        </table><br>
+    </form>
+</body>
+<script>
+
+    getJSON('Patient');
+    function getJSON(type) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', fhir.url + type, true);//"?_count=100"
+        xhr.setRequestHeader("Content-type", 'application/json');
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) // && this.status == 201) 
+            {
+                if (type == 'Patient') {
+                    Patientfhir = JSON.parse(this.responseText);
+                    setOptionSelect();
+                }
+                else if (type == 'ImagingStudy') {
+                    ImagingStudyfhir = JSON.parse(this.responseText);
+                    setTableImagingStudy();
+                }
+                //alert(this.responseText);
+
+            }
+        }
+        xhr.send();
+    }
+    function setOptionSelect() {
+        var dropdownform = document.createElement('select');
+        dropdownform.appendChild(option = document.createElement("option"));
+        option.value = "0";
+        option.text = "Patient ID";
+        for (var i = 0; i < Patientfhir.entry.length; i++) {
+            dropdownform.appendChild(option = document.createElement("option"));
+            option.value = Patientfhir.entry[i].resource.id;
+            option.text = Patientfhir.entry[i].resource.id;
+        }
+        document.getElementById("divselectP").appendChild(dropdownform);
+    }
+    function searchImagingStudy() {
+        getJSON('ImagingStudy');
+    }
+    function deleterowTable(Tablename) {
+        var myTable = document.getElementById(Tablename);
+        var rowCount = myTable.rows.length;
+        for (var x = rowCount - 1; x > 0; x--) {
+            myTable.deleteRow(x);
+        }
+    }
+    function setTableImagingStudy() {
+        deleterowTable("myTable");
+        deleterowTable("myTableSeries");
+        deleterowTable("myTableInstance");
+        PatientIDType = document.getElementById("PatientIDType").value;
+        var table = document.getElementById("myTable");
+        var row = 0;
+        for (var i = 0; i < ImagingStudyfhir.entry.length; i++) {
+            if (ImagingStudyfhir.entry[i].resource.subject.reference == 'Patient/' + PatientIDType) {
+                table.appendChild(tr = document.createElement("tr"));
+                tr.appendChild(td = document.createElement("td"));
+                tr.id = i;
+                tr.onclick = function () { setTableSeries(this, table) };
+                td.innerHTML = row + 1;
+                tr.appendChild(td = document.createElement("td"));
+                td.innerHTML = ImagingStudyfhir.entry[i].resource.identifier[0].value;
+                row++;
+            }
+        }
+    }
+    function setTableSeries(thisrow, table) {
+        //alert(thisrow.cells[1].innerHTML);
+        deleterowTable("myTableSeries");
+        deleterowTable("myTableInstance");
+        var table = document.getElementById("myTableSeries");
+        var row = 0;
+
+        var numser = ImagingStudyfhir.entry[thisrow.id].resource.series.length;
+        for (var j = 0; j < numser; j++) {
+            table.appendChild(tr = document.createElement("tr"));
+            tr.appendChild(td = document.createElement("td"));
+            tr.id = thisrow.id + ";" + j;
+            tr.onclick = function () { setTableInstance(this, table) };
+            td.innerHTML = row + 1;
+            tr.appendChild(td = document.createElement("td"));
+            td.innerHTML = ImagingStudyfhir.entry[thisrow.id].resource.series[j].uid;
+            row++;
+        }
+
+    }
+    function setTableInstance(thisrow, table) {
+        deleterowTable("myTableInstance");
+        var table = document.getElementById("myTableInstance");
+        var row = 0;
+        var ca = thisrow.id.split(';');
+        for (var k = 0; k < ca.length; k++) {
+            ca[k] = parseInt(ca[k])
+        }
+        var numser = ImagingStudyfhir.entry[ca[0]].resource.series[ca[1]].instance.length;
+        for (var j = 0; j < numser; j++) {
+            table.appendChild(tr = document.createElement("tr"));
+            tr.appendChild(td = document.createElement("td"));
+            tr.id = thisrow.id + ";" + j;
+            //tr.onchange = function () { setTableInstance(this, table) };
+            td.innerHTML = row + 1;
+            tr.appendChild(td = document.createElement("td"));
+            td.innerHTML = ImagingStudyfhir.entry[ca[0]].resource.series[ca[1]].instance[j].uid;
+            row++;
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,101 @@
+<html>
+
+<head>
+	<style>
+		table,
+		tr,
+		td {
+			border: 2px solid black;
+			border-collapse: collapse;
+		}
+
+		.tab {
+			overflow: hidden;
+			background-color: #f1f1f1;
+		}
+
+		.tab button {
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		.tab button:hover {
+			background-color: #ddd;
+		}
+
+		.w3-red,
+		.w3-hover-red:hover {
+			background-color: white !important
+		}
+
+		.tabcontent {
+			padding: 6px 12px;
+			border: 1px solid #ccc;
+			border-top: none;
+		}
+	</style>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<script language="JavaScript" type="text/javascript" src="xmlOutput.js"></script>
+	<script language="JavaScript" type="text/javascript" src="jsonObservation.js"></script>
+</head>
+
+<body>
+	<table align="center">
+		<tr bgcolor="yellow">
+			<td align="center">
+				Question Check
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<div id="QuestionCheck" class="tabcontent">
+					<form id="QuestionCheck" name="QuestionCheck" style="text-align: center">
+						<table align="center">
+							<tr>
+								<td colspan="4">
+									Q1：Retraction of the skin and/or nipple：
+									<input name="RetractionSkin" id="RetractionSkin_0" type="checkbox"
+										value="Right" />Rt.&nbsp;
+									<input name="RetractionSkin" id="RetractionSkin_1" type="checkbox"
+										value="Left" />Lt.<br />
+									Q2：Thickening of the skin：
+									<input name="ThickeningSkin" id="ThickeningSkin_0" type="checkbox"
+										value="Right" />Rt.&nbsp;
+									<input name="ThickeningSkin" id="ThickeningSkin_1" type="checkbox"
+										value="Left" />Lt.<br />
+									Q3：Dilated lactiferous ducts：
+									<input name="DilatedLactiferous" id="DilatedLactiferous_0" type="checkbox"
+										value="Right" />Rt.&nbsp;
+									<input name="DilatedLactiferous" id="DilatedLactiferous_1" type="checkbox"
+										value="Left" />Lt.<br />
+									Q4：Dense or enlarged axillary LNs：
+									<input name="EnlargedAxillary" id="EnlargedAxillary_0" type="checkbox"
+										value="Right" />Rt.&nbsp;
+									<input name="EnlargedAxillary" id="EnlargedAxillary_1" type="checkbox"
+										value="Left" />Lt.<br />
+									Q5：Others：
+									<input id="Q5_answer" type="text" />
+								</td>
+							</tr>
+						</table>
+						<div align="center">
+							<br><input type="button" value="確定" id="QuestionCheck" name="RID34261"
+								onclick="check(this)" />
+						</div>
+					</form>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<script>
+
+	</script>
+</body>
+
+</html>
