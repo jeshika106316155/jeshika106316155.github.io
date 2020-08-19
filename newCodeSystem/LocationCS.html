@@ -1,0 +1,295 @@
+<html>
+
+<head>
+    <style>
+        table,
+        tr,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: gray;
+            color: white;
+        }
+
+        div.b {
+            position: relative;
+            left: 15px;
+        }
+    </style>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <h2>LocationCS CodeSystem</h2>
+    <p>Location is describe as the point position of a mass was finding. Usually refers to the anatomical location of an
+        organ. The goal of recording the location of the mass is that it can be used in image guided radiation oncology
+        and surgical operation.
+    </p>
+    <div class="b">
+        <p>
+            &#9733 Topography location of breast
+        </p>
+        <p>
+            There is an element of One view only that interpreting as screening mammography in one view, there are
+            generally
+            two standard screening views used mainly for diagnostic evaluation of lesions in mammography, they are
+            mediolateral oblique (MLO) view and craniocaudal (CC) view.
+        </p>
+    </div>
+    <table>
+        <tr>
+            <td align="center"><a href="https://static1.bigstockphoto.com/2/9/2/large1500/292889569.jpg"
+                    target="blank"><img src="https://static1.bigstockphoto.com/2/9/2/large1500/292889569.jpg"
+                        width="250" height="250"></a>
+                <br>
+                <i>Pic 1. Two screening views of breast mammography</i></td>
+            <td>&#9826 MLO view is projion parallel to the pectoralis major muscle, and pectoralis should be seen to the
+                level of or below the axis of the nipple and appear convex (never concave toward the nipple).<br>
+                &#9826 CC view is Projection with slight rotation toward the sternum to detect posteromedial tumors that
+                may be missed on the MLO view, lesion should be seen between axilla and medial of the breast.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <a href=" https://i.pinimg.com/564x/f8/5f/99/f85f9926a2708f94bfdd07ad11160fb6.jpg" target="blank"><img
+                        src="https://i.pinimg.com/564x/f8/5f/99/f85f9926a2708f94bfdd07ad11160fb6.jpg" width="250"
+                        height="250"></a>
+                <a href="https://www.researchgate.net/publication/322351773/figure/fig4/AS:581079094267905@1515551460951/Breast-quadrants-definition-Upper-Outer-UOQ-Upper-Inner-UIQ-Lower-Outer-LOQ.png"
+                    target="blank"><img
+                        src="https://www.researchgate.net/publication/322351773/figure/fig4/AS:581079094267905@1515551460951/Breast-quadrants-definition-Upper-Outer-UOQ-Upper-Inner-UIQ-Lower-Outer-LOQ.png"
+                        width="250" height="250"></a><br>
+                <i>Pic 2. Location point of breast mammograpgy</i>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                &#9826 UOQ: Upper outer quadrant<br>
+                &#9826 UIQ: Upper inner quadrant<br>
+                &#9826 LOQ: Lower outer quadrant<br>
+                &#9826 LIQ: Lower inner quadrant<br>
+            </td>
+        </tr>
+    </table>
+    <p>This code system <a href="/newCodeSystem/LocationCS.html"
+            target="blank">http://127.0.0.1:5500/newCodeSystem/LocationCS.html</a>
+        defines the following codes:</p>
+    <form id="mass" name="mass" style="text-align: center">
+        <table align="center">
+            <tr>
+                <th>Code</th>
+                <th>Display</th>
+                <th>Definition</th>
+            </tr>
+            <tr>
+                <td>breast.left.nipple</td>
+                <td>Nipple of left breast</td>
+                <td>Nipple of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.nipple</td>
+                <td>Nipple of right breast</td>
+                <td>Nipple of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.centralportion</td>
+                <td>Central portion of left breast</td>
+                <td>Central portion of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.centralportion</td>
+                <td>Central portion of right breast</td>
+                <td>Central portion of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.uiq</td>
+                <td>Upper inner quadrant of left breast</td>
+                <td>Upper inner quadrant of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.uiq</td>
+                <td>Upper inner quadrant of right breast</td>
+                <td>Upper inner quadrant of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.liq</td>
+                <td>Lower inner quadrant of left breast</td>
+                <td>Lower inner quadrant of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.liq</td>
+                <td>Lower inner quadrant of right breast</td>
+                <td>Lower inner quadrant of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.uoq</td>
+                <td>Upper outer quadrant of left breast</td>
+                <td>Upper outer quadrant of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.uoq</td>
+                <td>Upper outer quadrant of right breast</td>
+                <td>Upper outer quadrant of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.loq</td>
+                <td>Lower outer quadrant of left breast</td>
+                <td>Lower outer quadrant of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.loq</td>
+                <td>Lower outer quadrant of right breast</td>
+                <td>Lower outer quadrant of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.axieltail</td>
+                <td>Axieltail of left breast</td>
+                <td>Axieltail of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.axieltail</td>
+                <td>Axieltail of right breast</td>
+                <td>Axieltail of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.overlapp</td>
+                <td>Overlap of left breast</td>
+                <td>Overlap of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.overlapp</td>
+                <td>Overlap of right breast</td>
+                <td>Overlap of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.nos</td>
+                <td>Not otherwise specified of left breast</td>
+                <td>Not otherwise specified of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.nos</td>
+                <td>Not otherwise specified of right breast</td>
+                <td>Not otherwise specified of right breast</td>
+            </tr>
+            <tr>
+                <td>breast.left.subareolar</td>
+                <td>Subareolar of left breast</td>
+                <td>Subareolar of left breast</td>
+            </tr>
+            <tr>
+                <td>breast.right.subareolar</td>
+                <td>Subareolar of right breast</td>
+                <td>Subareolar of right breast</td>
+            </tr>
+            <tr>
+                <td>liver.Segment1</td>
+                <td>Segment I of liver</td>
+                <td>Segment I of liver</td>
+            </tr>
+            <tr>
+                <td>liver.Segment2</td>
+                <td>Segment II of liver</td>
+                <td>Segment II of liver</td>
+            </tr>
+            <tr>
+                <td>liver.Segment3</td>
+                <td>Segment III of liver</td>
+                <td>Segment III of liver</td>
+            </tr>
+            <tr>
+                <td>liver.Segment4a</td>
+                <td>Segment IVa of liver</td>
+                <td>Segment IVa of liver</td>
+            </tr>
+            <tr>
+                <td>liver.Segment4b</td>
+                <td>Segment IVb of liver</td>
+                <td>Segment IVb of liver</td>
+            </tr>
+            <tr>
+                <td>liver.Segment5</td>
+                <td>Segment V of liver</td>
+                <td>Segment V of liver</td>
+            </tr>
+            <tr>
+                <td>liver.Segment6</td>
+                <td>Segment VI of liver</td>
+                <td>Segment VI of liver</td>
+            </tr>
+            <tr>
+                <td>liver.left.lateral.sector</td>
+                <td>Left lateral sector of liver</td>
+                <td>Left lateral sector of liver</td>
+            </tr>
+            <tr>
+                <td>liver.left.medial.sector</td>
+                <td>Left medial sector of liver</td>
+                <td>Left medial sector of liver</td>
+            </tr>
+            <tr>
+                <td>liver.right.anterior.sector</td>
+                <td>Right anterior sector of liver</td>
+                <td>Right anterior sector of liver</td>
+            </tr>
+            <tr>
+                <td>liver.right.posterior.sector</td>
+                <td>Right posterior sector of liver</td>
+                <td>Right posterior sector of liver</td>
+            </tr>
+            <tr>
+                <td>liver.left.lobe</td>
+                <td>Left lobe of liver</td>
+                <td>Left lobe of liver</td>
+            </tr>
+            <tr>
+                <td>liver.right.lobe</td>
+                <td>Right lobe of liver</td>
+                <td>Right lobe of liver</td>
+            </tr>
+            <tr>
+                <td>liver.uncertain</td>
+                <td>Uncertain location of liver</td>
+                <td>Uncertain location of liver</td>
+            </tr>
+            <tr>
+                <td>liver.unknown</td>
+                <td>Unknown location of liver</td>
+                <td>Unknown location of liver</td>
+            </tr>
+            <tr>
+                <td>colon.rectum</td>
+                <td>Rectum</td>
+                <td>Rectum</td>
+            </tr>
+            <tr>
+                <td>colon.sigmoid</td>
+                <td>Sigmoid colon</td>
+                <td>Sigmoid colon</td>
+            </tr>
+            <tr>
+                <td>colon.descending</td>
+                <td>Descending colon</td>
+                <td>Descending colon</td>
+            </tr>
+            <tr>
+                <td>colon.transverse</td>
+                <td>Transverse colon</td>
+                <td>Transverse colon</td>
+            </tr>
+            <tr>
+                <td>colon.ascending</td>
+                <td>Ascending colon</td>
+                <td>Ascending colon</td>
+            </tr>
+            <tr>
+                <td>colon.cecum</td>
+                <td>Cecum</td>
+                <td>Cecum</td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

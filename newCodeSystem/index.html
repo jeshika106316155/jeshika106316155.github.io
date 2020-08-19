@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <style>
+        ul {
+            list-style-type: none;
+            max-width: 960px;
+            margin: auto;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+
+        li:last-child {
+            border-right: none;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #4CAF50;
+        }
+    </style>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <h1 align="center" style="font-size:25px;">New Standard of FHIR Mass Report Code System </h1>
+    <ul align="center" width="1000px">
+        <!-- class="active" -->
+        <li><a href="home.html" target="myframe">Home</a></li>
+        <li><a href="/newCodeSystem/newCodeSystem.html" target="myframe">Code Sytem</a>
+            <!-- <button onclick="openTab('http://127.0.0.1:5500/newCodeSystem/newCodeSystem.html','> Code System')">Code
+                System</button> -->
+        </li>
+    </ul>
+    <!-- <ul id="pathAddress">
+        <a href="#home">Home</a>
+    </ul> -->
+    <p align="center"><iframe src="home.html" name="myframe" width="1000" height="1000"></iframe></p>
+
+    <!-- <script>
+        function openTab(tabNameurl, tabName) {
+            var frame = document.getElementById("myframe").src = tabNameurl;
+            var ulpath = document.getElementById("pathAddress");
+            const li = document.createElement('li');
+            const anchor = document.createElement('a');
+            anchor.href = '#home';
+            anchor.innerText = 'Home';
+            li.appendChild(anchor);
+            const li2 = document.createElement('li');
+            li2.innerHTML = tabName;
+            ulpath.appendChild(li);
+            ulpath.appendChild(li2);
+        }
+    </script> -->
+</body>
+
+</html>

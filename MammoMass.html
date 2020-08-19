@@ -70,26 +70,46 @@
 							<tr>
 								<td rowspan="2" align="center">Location</td>
 								<td colspan="2">
-									<input type="radio" name="BreastSiteCS" id="C50.0" value="Nipple" />Nipple&nbsp;
-									<input type="radio" name="BreastSiteCS" id="C50.1"
-										value="Central portion of the breast." />Central portion of the breast&nbsp;
-									<input type="radio" name="BreastSiteCS" id="C50.2"
-										value="Upper inner quadrant" />UIQ&nbsp;
-									<input type="radio" name="BreastSiteCS" id="C50.3"
-										value="Lower inner quadrant" />LIQ&nbsp;
-									<input type="radio" name="BreastSiteCS" id="C50.4"
-										value="Upper outer quadrant" />UOQ&nbsp;
-									<input type="radio" name="BreastSiteCS" id="C50.5"
-										value="Lower outer quadrant" />LOQ&nbsp;<br>
-									<input type="radio" name="BreastSiteCS" id="C50.6"
-										value="Axillary tail of breast" />Axillary tail
-									<input type="radio" name="BreastSiteCS" id="C50.8"
-										value="Overlapping lesion of breast" />Overlapping lesion of breast&nbsp;
-									<input type="radio" name="BreastSiteCS" id="C50.9"
-										value="Breast, not otherwise specified (NOS)" />Breast, not otherwise specified
-									(NOS)&nbsp;
-									<input type="radio" name="BreastSiteCS" id="C50.10"
-										value="SubAreolar" />sub-areolar&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.nipple"
+										value="breast.left.nipple" />breast.left.nipple&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.nipple"
+										value="breast.right.nipple" />breast.right.nipple&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.centralportion"
+										value="breast.left.centralportion" />breast.left.centralportion&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.centralportion"
+										value="breast.right.centralportion" />breast.right.centralportion&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.uiq"
+										value="breast.left.uiq" />breast.left.uiq&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.uiq"
+										value="breast.right.uiq" />breast.right.uiq&nbsp;<br>
+									<input type="radio" name="LocationCS" id="breast.left.liq"
+										value="breast.left.liq" />breast.left.liq
+									<input type="radio" name="LocationCS" id="breast.right.liq"
+										value="breast.right.liq" />breast.right.liq&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.uoq"
+										value="breast.left.uoq" />breast.left.uoq&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.uoq"
+										value="breast.right.uoq" />breast.right.uoq&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.loq"
+										value="breast.left.loq" />breast.left.loq&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.loq"
+										value="breast.right.loq" />breast.right.loq&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.axieltail"
+										value="breast.left.axieltail" />breast.left.axieltail&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.axieltail"
+										value="breast.right.axieltail" />breast.right.axieltail&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.overlapp"
+										value="breast.left.overlapp" />breast.left.overlapp&nbsp;<br>
+									<input type="radio" name="LocationCS" id="breast.right.overlapp"
+										value="breast.right.overlapp" />breast.right.overlapp&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.nos"
+										value="breast.left.nos" />breast.left.nos&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.nos"
+										value="breast.right.nos" />breast.right.nos&nbsp;
+									<input type="radio" name="LocationCS" id="breast.left.subareolar"
+										value="breast.left.subareolar" />breast.left.subareolar&nbsp;
+									<input type="radio" name="LocationCS" id="breast.right.subareolar"
+										value="breast.right.subareolar" />breast.right.subareolar&nbsp;
 								</td>
 							</tr>
 							<tr>
@@ -108,11 +128,11 @@
 							<tr>
 								<td>Size</td>
 								<td colspan="2">
-									<input type="radio" name="SizeCS" id="SO1" value="1.0 cm" />&lt;1.0 cm&nbsp;
-									<input type="radio" name="SizeCS" id="SO2" value="1-2 cm" />1-2 cm&nbsp;
-									<input type="radio" name="SizeCS" id="SO3" value="2-3 cm" />2-3 cm&nbsp;
-									<input type="radio" name="SizeCS" id="SO4" value="3-4 cm" />3-4 cm&nbsp;
-									<input type="radio" name="SizeCS" id="SO5" value="54 cm" />&gt;4 cm
+									<input type="radio" name="SizeCS" id="<1 cm" value="<1 cm" />&lt;1.0 cm&nbsp;
+									<input type="radio" name="SizeCS" id="1-2 cm" value="1-2 cm" />1-2 cm&nbsp;
+									<input type="radio" name="SizeCS" id="2-3 cm" value="2-3 cm" />2-3 cm&nbsp;
+									<input type="radio" name="SizeCS" id="3-4 cm" value="3-4 cm" />3-4 cm&nbsp;
+									<input type="radio" name="SizeCS" id=">4 cm" value=">4 cm" />&gt;4 cm
 								</td>
 							</tr>
 							<tr>
@@ -174,6 +194,9 @@
 			</td>
 		</tr>
 	</table>
+	<script>
+		alert(document.cookie);
+	</script>
 </body>
 
 </html>

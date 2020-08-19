@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <style>
+        table,
+        tr,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: gray;
+            color: white;
+        }
+    </style>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <h2>The new standardize of code system for all bodysite</h2>
+    <p>With amount of code systems, libraries and value sets that are already available. However, there is still no
+        international standard code used in medical finding observation, both in mammography, chest x-ray and others.
+        In addition, there are difficulties in mapping code values used in the finding form to LOINC or SNOMED code
+        system. Therefore HL7 establishes an independent value set in breast radiology, but it will lead to different
+        body locations and organs have each own value set, this causes difficulty managing the current system code.
+    </p>
+    <p>Therefore, a new standardize of code value based on medical anatomy and pathology is created in this
+        specification to facilitate the easy reading and effective definition of code. Moreover, a new standardize of
+        code value obtain the code that can be used for all body sites, it will simplify the use of independent value
+        sets at each body site.</p>
+    <p>
+        The advantages of the new standardize of code value:<br>
+        &#9826 Mnemonic code will be more convenience for communication and easy to understand.<br>
+        &#9826 May be used for training AI systems in professional speech recognition in the future<br>
+        &#9826 New code system use clear name to define the code value <br>
+    </p>
+    <p>Example:
+        In current situation there are three different code systems used to define the location code value of liver,
+        breast and colon.<br>
+        &#9826 Breast: <a href="http://hl7.org/fhir/us/breastcancer/2018May/CodeSystem-oncology-BreastSiteCS.html"
+            target="blank">http://hl7.org/fhir/us/breastcancer/2018May/CodeSystem-oncology-BreastSiteCS.html</a><br>
+        &#9826 Liver:<a href="https://www.radelement.org/home/elements/element/RDE1053"
+            target="blank">https://www.radelement.org/home/elements/element/RDE1053</a><br>
+        &#9826 Colon: <a href="https://www.radelement.org/home/elements/element/RDE79"
+            target="blank">https://www.radelement.org/home/elements/element/RDE79</a><br>
+        But for the present it will develop an independent location code system to collect all location value codes used
+        in all body organ (both liver, innestine, and breast radiography, etc), bellow is the Location Code System web
+        link:
+        <a href="/newCodeSystem/LocationCS.html" target="blank">http://127.0.0.1:5500/newCodeSystem/LocationCS.html
+        </a>
+    </p>
+
+</body>
+
+</html>

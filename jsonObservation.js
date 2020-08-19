@@ -23,7 +23,7 @@ massObservation =
 {
     "valueCodeableConcept": {
         "coding": [{
-            "system": "http://hl7.org/fhir/us/breastcancer/CodeSystem/breastrad-RtOrLt",
+            "system": "http://hl7.org/fhir/valueset-bodysite-laterality.html",
             "code": "",
         }]
     },
@@ -36,39 +36,39 @@ massObservation =
         "code": {
             "fhir_comments": ["Location"],
             "coding": [{
-                "system": "http://hl7.org/fhir/us/breastcancer/CodeSystem/oncology-BreastSiteCS",
+                "system": "http://127.0.0.1:5500/newCodeSystem/LocationCS.html",
                 "code": "",
             }, {
                 "fhir_comments": [" One view Only "],
-                "system": "http://hl7.org/fhir/us/breastcancer/CodeSystem/breastrad-HemsphereViewCS",
+                "system": "HemisphereCS",
                 "code": "",
             }]
         }
     }, {
         "code": {
             "coding": [{
-                "system": "http://hl7.org/fhir/us/breastcancer/CodeSystem/breastrad-SizeCS",
+                "system": "SizeCS",
                 "code": "",
             }]
         }
     }, {
         "code": {
             "coding": [{
-                "system": "http://hl7.org/fhir/us/breast-radiology/CodeSystem/breastrad-ShapeCS",
+                "system": "http://hl7.org/fhir/us/breast-radiology/2019Sep/ValueSet-breastrad-ShapeVS.html",
                 "code": "",
             }]
         }
     }, {
         "code": {
             "coding": [{
-                "system": "http://hl7.org/fhir/us/breast-radiology/CodeSystem/breastrad-MarginCS",
+                "system": "http://hl7.org/fhir/us/breast-radiology/2019Sep/ValueSet-breastrad-MarginVS.html",
                 "code": "",
             }]
         }
     }, {
         "code": {
             "coding": [{
-                "system": "http://hl7.org/fhir/us/breast-radiology/CodeSystem/breastrad-AbnormalityDensityCS",
+                "system": "http://hl7.org/fhir/us/breast-radiology/2019Sep/ValueSet-breastrad-AbnormalityDensityVS.html",
                 "code": "",
             }]
         }

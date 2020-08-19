@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <!-- <script language="JavaScript" type="text/javascript" src="xmlOutput.js"></script> -->
+    <script language="JavaScript" type="text/javascript" src="codesystemJSON.js"></script>
+</head>
+
+<body>
+    <textarea id="textArea" style="width:1000px;height:500px;"></textarea>
+    <input type="button" value="POST FHIR" onclick="" />
+    <script>
+        readJson();
+        function readJson() {
+            var str = JSON.stringify(codesystemFHIR, undefined, 4);
+            document.getElementById("textArea").innerHTML = str;
+        }
+        function post() {
+            codesystemFHIR.date = new Date().format('m-d-Y h:i:s');
+
+        }
+    </script>
+</body>
+
+</html>

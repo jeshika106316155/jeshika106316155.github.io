@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <style>
+        table,
+        tr,
+        td {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: gray;
+            color: white;
+        }
+
+        .tab {
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .w3-red,
+        .w3-hover-red:hover {
+            background-color: white !important
+        }
+
+        .tabcontent {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <div class="tab">
+        <button class="tablinks w3-red" onclick="openTab(event,'html')">Content</button>
+        <button onclick="openTab(event,'json')" class="tablinks">JSON</button>
+    </div>
+    <p align="center"><iframe id="myframe2" width="1000" height="1000"></iframe></p>
+    <!-- <div id="Mass" class="tabcontent"></div> -->
+    <!-- //https://www.petanikode.com/html-link/ -->
+
+
+    <script>
+        openTab(event, 'html');
+        function openTab(evt, tabName) {
+            let url = new URL(window.location.href);
+            let searchParams = new URLSearchParams(url.search);
+            //console.log(searchParams.get('c'));
+            //var querystring = window.location.querystring;
+            var myValue = searchParams.get('id');
+            var newUrl = '';
+            if (myValue == 'LocationCS') {
+                newUrl = '/newCodeSystem/LocationCS';
+            }
+            else if (myValue == 'DistanceCS') {
+                newUrl = '/newCodeSystem/DistanceCS';
+            }
+            if (tabName == 'html') {
+                newUrl += '.html';
+            }
+            else { newUrl += '.json.html'; }
+            var tablinks = document.getElementsByClassName("tablinks");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            if (evt != null)
+                evt.currentTarget.className += " w3-red";
+            var frame = document.getElementById("myframe2").src = newUrl;
+        }
+    </script>
+</body>
+
+</html>

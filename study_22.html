@@ -129,7 +129,6 @@
 
 		img {
 			width: 95%;
-			length: 100%;
 			border: 3px solid transparent;
 		}
 
@@ -1064,6 +1063,7 @@
 			td.innerHTML = "";
 		}
 		function postFHIR(rowslength) {
+			//alert(rowslength);
 			var annotationType = document.getElementById("myTable").rows[rowslength].cells[0].innerHTML;
 			document.getElementById("postAnnotationBtn" + rowslength).value = "posted";
 			var svg = document.getElementById("PositionTB" + rowslength).value;
